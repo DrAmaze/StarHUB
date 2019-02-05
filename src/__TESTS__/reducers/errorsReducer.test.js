@@ -1,7 +1,7 @@
 import reducer from '../../reducers/errorsReducer';
 import * as actions from '../../actions/errorActions';
 
-describe('Error Reducer: ', () => {
+describe('Errors Reducer: ', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual({});
   });
