@@ -6,7 +6,7 @@ describe('Error Actions: ', () => {
       type: actions.CLEAR_REPO_ERRORS
     };
     expect(actions.clearRepoErrors()).toEqual(expectedAction);
-  })
+  });
   
   it('should create an action to receive repo errors', () => {
     const errors = 'Repo Not Found';
@@ -15,5 +15,5 @@ describe('Error Actions: ', () => {
       errors
     };
     expect(actions.receiveErrors(errors)).toEqual(expectedAction);
-  })
-})
+  });
+});
