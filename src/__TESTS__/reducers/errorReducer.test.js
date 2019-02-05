@@ -1,15 +1,13 @@
-import reducer from '../../reducers/errorReducer';
+import reducer from '../../reducers/errorsReducer';
 import * as actions from '../../actions/errorActions';
 
 describe('Error Reducer: ', () => {
-  const _null = [];
-
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(_null);
+    expect(reducer(undefined, {})).toEqual({});
   });
 
   it('should handle CLEAR_REPO_ERRORS', () => {
-    const _nullRepoErrors = { repoErrors: _null };
+    const _nullRepoErrors = { repoErrors: [] };
     const clearAction = {
       type: actions.CLEAR_REPO_ERRORS
     };

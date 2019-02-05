@@ -4,11 +4,9 @@ import {
   RECEIVE_REPO_ERRORS
 } from '../actions/errorActions';
 
-const _nullRepoErrors = {
-  repoErrors: []
-};
+const _nullRepoErrors = { repoErrors: [] };
 
-export default (state = [], action) => {
+const errorsReducer = (state = {}, action) => {
   Object.freeze(state);
   switch(action.type) {
     case RECEIVE_REPO_ERRORS:
@@ -19,3 +17,5 @@ export default (state = [], action) => {
       return state;
   }
 };
+
+export default errorsReducer;
