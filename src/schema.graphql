@@ -8,7 +8,12 @@ type Feed {
 }
 
 type Mutation {
-  put(url: String!, starred: Boolean!): Repo!
+  put(url: String!, starred: Boolean!): GitHubPayload!
+}
+
+type GitHubPayload {
+  token: String
+  Repo: Repo
 }
 
 type Repo {
@@ -19,8 +24,4 @@ type Repo {
   description: String
   url: String!
   stargazers_count: Int!
-}
-
-type GitHubPayload {
-  token: String
 }

@@ -4,7 +4,7 @@ class RepoList extends React.Component {
   render() {
     return (
       <ul>
-        this is fun
+        
       </ul>
     )
   }
