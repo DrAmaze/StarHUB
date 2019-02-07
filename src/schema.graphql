@@ -1,9 +1,26 @@
-type Repo {
-  id: ID!
-  name: String
-  starred: Boolean
+type Query {
+  feed(filter: String, skip: Int, first: Int): Feed!
 }
 
-type Query {
-  repos: [ Repo ]
+type Feed {
+  repos: [ Repo! ]!
+  count: Int!
+}
+
+type Mutation {
+  put(url: String!, starred: Boolean!): Repo!
+}
+
+type Repo {
+  id: ID!
+  name: String!
+  starred: Boolean!
+  owner: String!
+  description: String
+  url: String!
+  stargazers_count: Int!
+}
+
+type GitHubPayload {
+  token: String
 }
