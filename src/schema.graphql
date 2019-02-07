@@ -1,0 +1,9 @@
+type Repo {
+  id: ID!
+  name: String
+  starred: Boolean
+}
+
+type Query {
+  repos: [ Repo ]
+}
