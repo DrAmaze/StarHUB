@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RepoList from './repos/repoList';
-import Navbar from './header/navbar';
+import Navbar from './utility/navbar';
+import Footer from './utility/footer';
 import './App.css';
 
 // This component operates as the dashboard of the single-page app
@@ -13,6 +14,7 @@ class App extends Component {
         </header>
         <Navbar />
         <RepoList />
+        <Footer />
       </div>
     );
   }
