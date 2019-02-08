@@ -1,4 +1,6 @@
 import React from 'react';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 import RepoListItem from './repoListItem';
 
 class RepoList extends React.Component {
@@ -14,18 +16,46 @@ class RepoList extends React.Component {
       }
     ]
 
-    const renderingRepos = mockRepos.map(repo => 
-      <RepoListItem repo={ repo } key={ repo.id } />
-    );
-    const count = renderingRepos.length;
+    const FEED_QUERY = gql`
+      {
+        feed {
+          repos {
+            id
+            name
+            starred
+            owner
+            description
+            url
+            stargazers_count
+          }
+          # count
+        }
+      }
+    `
     
     return (
-      <div>
-        <div>Showing { count } results</div>
+      <Query query={ FEED_QUERY }>
         <ul>
-          { renderingRepos }
+          {
+            ({ loading, error, data }) => {
+              if (loading) return <div>Fetching</div>
+              if (error) return <div>Error</div>
+              console.log('THISISDADA?TA: ', data);
+
+              const renderingRepos = data.feed.repos.map(repo =>
+                <RepoListItem repo={ repo } key={ repo.id } />
+              );
+              const count = renderingRepos.length;
+              return (
+                <div>
+                  { renderingRepos }
+                  <div>Showing { count } results</div>
+                </div>
+              )
+            }
+          }
         </ul>
-      </div>
+      </Query>
     )
   }
 }

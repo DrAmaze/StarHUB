@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Navbar extends Component {
   render() {
     return (
-      <navbar>
+      <nav>
         <div>
           <button>
             Starred
@@ -15,7 +15,7 @@ class Navbar extends Component {
             placeholder='Search'>
           </input>
         </div>
-      </navbar>
+      </nav>
     )
   }
 }
