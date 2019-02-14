@@ -5,56 +5,63 @@ import RepoListItem from './repoListItem';
 
 class RepoList extends React.Component {
   render() {
-    const mockRepos = [
-      {
-        id: 1,
-        name: 'Super Cool Project'
-      },
-      {
-        id: 2,
-        name: 'Somewhat Less Cool Project'
-      }
-    ]
-
-    const FEED_QUERY = gql`
-      {
-        feed {
-          repos {
-            id
-            name
-            starred
-            owner
-            description
-            url
-            stargazers_count
+    
+    const GET_FEED_QUERY = gql`
+      query($organization: String!, $cursor: String) {
+        organization(login: $organization) {
+          name
+          url
+          repositories(
+            first: 5
+            orderBy: { direction: DESC, field: STARGAZERS }
+            after: $cursor
+          ) {
+            edges {
+              node {
+                ...repository
+              }
+            }
+            pageInfo {
+              endCursor
+              hasNextPage
+            }
           }
-          # count
         }
       }
-    `
+      fragment repository on Repository {
+        name
+        url
+      }
+    `;
     
     return (
-      <Query query={ FEED_QUERY }>
-        <ul>
+      <Query query={GET_FEED_QUERY}>
           {
             ({ loading, error, data }) => {
               if (loading) return <div>Fetching</div>
-              if (error) return <div>Error</div>
-              console.log('THISISDADA?TA: ', data);
+              if (error) {
+                console.log('THIS IS THE ERROR: ', error);
+                return <div>Error</div>
+              }
+              console.log('THISISDATA: ', data);
 
               const renderingRepos = data.feed.repos.map(repo =>
-                <RepoListItem repo={ repo } key={ repo.id } />
+                // <RepoListItem repo={repo} key={repo.id} />
+                <div>
+                  {repo}
+                </div>
               );
               const count = renderingRepos.length;
               return (
-                <div>
-                  { renderingRepos }
-                  <div>Showing { count } results</div>
-                </div>
+                <ul>
+                  <div>
+                    {renderingRepos}
+                    <div>Showing {count} results</div>
+                  </div>
+                </ul> 
               )
             }
           }
-        </ul>
       </Query>
     )
   }
