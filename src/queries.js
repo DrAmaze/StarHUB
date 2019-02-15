@@ -40,3 +40,33 @@ export const GET_REPOSITORIES = gql`
     }   
   }
 `;
+
+// repositoryOwner:
+// repositories:
+// nodes: Array(20)
+// 0:
+// description: "the OG repository"
+// id: "MDEwOlJlcG9zaXRvcnk5MzE5MzYyMg=="
+// name: "hello-world"
+// owner: { login: "DrAmaze", __typename: "User" }
+// stargazers: { totalCount: 0, __typename: "StargazerConnection" }
+// url: "https://github.com/DrAmaze/hello-world"
+// __typename: "Repository"
+// __proto__: Object
+// 1:
+// description: null
+// id: "MDEwOlJlcG9zaXRvcnk5NDg1MzUzMw=="
+// name: "cloud9"
+// owner: { login: "DrAmaze", __typename: "User" }
+// stargazers: { totalCount: 0, __typename: "StargazerConnection" }
+// url: "https://github.com/DrAmaze/cloud9"
+// __typename: "Repository"
+// __proto__: Object
+// 2:
+// description: "app academy prep"
+// id: "MDEwOlJlcG9zaXRvcnk5NzUzMDU5MA=="
+// name: "practice-problems"
+// owner: { login: "DrAmaze", __typename: "User" }
+// stargazers: { totalCount: 0, __typename: "StargazerConnection" }
+// url: "https://github.com/DrAmaze/practice-problems"
+// __typename: "Repository"

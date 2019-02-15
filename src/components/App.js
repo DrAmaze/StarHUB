@@ -1,9 +1,7 @@
-import { createHttpLink } from 'apollo-link-http';
 import ApolloClient, { InMemoryCache } from 'apollo-boost';
 import { ApolloProvider } from "react-apollo";
 import React, { Component } from 'react';
-import RepoList from './repos/repoList';
-import Navbar from './utility/navbar';
+import Dashboard from './utility/dashboard';
 import Footer from './utility/footer';
 import './App.css';
 
@@ -13,7 +11,7 @@ const client = new ApolloClient({
   request: operation => {
     operation.setContext({
       headers: {
-        authorization: `Bearer 8df36c579bbab40f7019770bb253446ed9283e2c`
+        authorization: `Bearer 9ab8917cbcd709882c15e88db973ef52e41d2e16`
       }
     });
   }
@@ -23,13 +21,12 @@ const client = new ApolloClient({
 class App extends Component {
   render() {
     return (
-      <ApolloProvider client={client} >
+      <ApolloProvider client={ client } >
         <div className="App">
           <header className="App-header">
             <h1>StarHUB</h1>
           </header>
-          <Navbar />
-          <RepoList />
+          <Dashboard />
           <Footer />
         </div>
       </ApolloProvider>
