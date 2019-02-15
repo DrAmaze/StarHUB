@@ -2,40 +2,17 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import RepoListItem from './repoListItem';
+import { GET_REPOSITORY, GET_REPOSITORIES } from '../../queries';
 
 class RepoList extends React.Component {
   render() {
+
+    const name =  'noncense';
+    const login =  'DrAmaze';
     
-    const GET_FEED_QUERY = gql`
-      query($organization: String!, $cursor: String) {
-        organization(login: $organization) {
-          name
-          url
-          repositories(
-            first: 5
-            orderBy: { direction: DESC, field: STARGAZERS }
-            after: $cursor
-          ) {
-            edges {
-              node {
-                ...repository
-              }
-            }
-            pageInfo {
-              endCursor
-              hasNextPage
-            }
-          }
-        }
-      }
-      fragment repository on Repository {
-        name
-        url
-      }
-    `;
     
-    return (
-      <Query query={GET_FEED_QUERY}>
+    const query = ({ login }) => (
+      <Query query={GET_REPOSITORIES} variables={{ login }}>
           {
             ({ loading, error, data }) => {
               if (loading) return <div>Fetching</div>
@@ -45,11 +22,9 @@ class RepoList extends React.Component {
               }
               console.log('THISISDATA: ', data);
 
-              const renderingRepos = data.feed.repos.map(repo =>
-                // <RepoListItem repo={repo} key={repo.id} />
-                <div>
-                  {repo}
-                </div>
+              const repos = data.repositoryOwner.repositories.nodes;
+              const renderingRepos = repos.map(repo =>
+                <RepoListItem repository={repo} key={repo.id} />
               );
               const count = renderingRepos.length;
               return (
@@ -63,7 +38,8 @@ class RepoList extends React.Component {
             }
           }
       </Query>
-    )
+    );
+    return query({login});
   }
 }
 
