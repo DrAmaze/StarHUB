@@ -1,7 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import RepoListItem from './repoListItem';
-import { GET_REPOSITORIES } from '../../queries';
+import { GET_REPOSITORIES } from '../../actions/queries';
 
 class RepoList extends React.Component {
   render() {
