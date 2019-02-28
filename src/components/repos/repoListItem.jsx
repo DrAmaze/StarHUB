@@ -12,20 +12,8 @@ class RepoListItem extends Component {
       isStarred: this.props.repository.viewerHasStarred,
       stargazers: this.props.repository.stargazers.totalCount
     }
-
-    this.removeStar = this.removeStar.bind(this);
-    this.addStar = this.addStar.bind(this);
   }
 
-  removeStar() {
-    const starCount = this.state.stargazers;
-    this.setState({ stargazers: starCount - 1 })
-  }
-
-  addStar() {
-    const starCount = this.state.stargazers;
-    this.setState({ stargazers: starCount + 1 })
-  }
 
   render() {
     const { id, viewerHasStarred } = this.props.repository;
