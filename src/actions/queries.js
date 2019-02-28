@@ -22,7 +22,7 @@ export const GET_REPOSITORY = gql`
 export const GET_REPOSITORIES = gql`
   query GetRepositories($login: String!) {
     repositoryOwner(login: $login) {
-      repositories(first: 20) {
+      repositories(first: 50) {
         totalCount
         nodes {
           id
@@ -35,6 +35,7 @@ export const GET_REPOSITORIES = gql`
           stargazers(first:10){
             totalCount
           }
+          viewerHasStarred
         }
       }
     }   
@@ -44,6 +45,17 @@ export const GET_REPOSITORIES = gql`
 export const STAR_REPOSITORY = gql`
   mutation StarRepository($id: ID!) {
     addStar(input: { starrableId: $id }) {
+      starrable {
+        id
+        viewerHasStarred
+      }
+    }
+  }
+`;
+
+export const UNSTAR_REPOSITORY = gql`
+  mutation StarRepository($id: ID!) {
+    removeStar(input: { starrableId: $id }) {
       starrable {
         id
         viewerHasStarred

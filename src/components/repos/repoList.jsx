@@ -2,6 +2,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import RepoListItem from './repoListItem';
 import { GET_REPOSITORIES } from '../../actions/queries';
+import Loading from '../utility/loading';
 
 class RepoList extends React.Component {
   render() {
@@ -11,7 +12,7 @@ class RepoList extends React.Component {
         {
           ({ loading, error, data }) => {
             console.log('HEREH', login);
-            if (loading) return <div>Fetching</div>
+            if (loading) return <Loading />
             if (error) {
               return <div>{ error.message }</div>
             }
