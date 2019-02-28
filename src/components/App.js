@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import Dashboard from './utility/dashboard';
 import Footer from './utility/footer';
 import './App.css';
-import RepoList from './repos/repoList';
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',

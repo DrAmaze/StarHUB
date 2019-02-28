@@ -6,7 +6,7 @@ import { GET_REPOSITORIES } from '../../actions/queries';
 class RepoList extends React.Component {
   render() {
     const searchTerm = this.props.searchTerm; 
-    const query = login => (
+    const query = (login = '') => (
       <Query query={ GET_REPOSITORIES } variables={{ login }}>
         {
           ({ loading, error, data }) => {
@@ -16,20 +16,25 @@ class RepoList extends React.Component {
               return <div>{ error.message }</div>
             }
             console.log('THISISDATA: ', data);
-            
-            const repos = data.repositoryOwner.repositories.nodes;
-            const renderingRepos = repos.map(repo =>
-              <RepoListItem repository={ repo } key={ repo.id } />
-              );
-              const count = renderingRepos.length;
-            return (
-              <ul>
-                <div>
-                  <h3>Showing { count } results for { searchTerm }</h3>
-                  { renderingRepos }
-                </div>
-              </ul> 
-            )
+            if (
+              data &&
+              data.repositoryOwner &&
+              data.repositoryOwner.repositories
+            ) {
+              const repos = data.repositoryOwner.repositories.nodes;
+              const renderingRepos = repos.map(repo =>
+                <RepoListItem repository={ repo } key={ repo.id } />
+                );
+                const count = renderingRepos.length;
+              return (
+                <ul>
+                  <div>
+                    <h3>Showing { count } results for { searchTerm }</h3>
+                    { renderingRepos }
+                  </div>
+                </ul> 
+              )
+            }
           }
         }
       </Query>

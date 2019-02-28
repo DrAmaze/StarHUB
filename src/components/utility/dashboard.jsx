@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import RepoList from '../repos/repoList';
 
 class Dashboard extends Component {
-  state = {
-    searchTerm: '',
-    submitted: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchTerm: '',
+      submitted: false
+    }
   }
 
   search(e) {
