@@ -9,30 +9,46 @@ class RepoListItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isStarred: this.props.repository.viewerHasStarred
+      isStarred: this.props.repository.viewerHasStarred,
+      stargazers: this.props.repository.stargazers.totalCount
     }
+
+    this.removeStar = this.removeStar.bind(this);
+    this.addStar = this.addStar.bind(this);
+  }
+
+  removeStar() {
+    const starCount = this.state.stargazers;
+    this.setState({ stargazers: starCount - 1 })
+  }
+
+  addStar() {
+    const starCount = this.state.stargazers;
+    this.setState({ stargazers: starCount + 1 })
   }
 
   render() {
     const { id, viewerHasStarred } = this.props.repository;
+    let { stargazers } = this.state;
+    const { isStarred } = this.state;
 
     const addStarLoading = <div>Sending the star...</div>;
     const removeStarLoading = <div>Removing the star...</div>;
     const errorDiv = err => <div className='error'>{ err.message }</div>;
 
-    const mutation = (starred = false) => {
-      if (starred) {
+    const mutation = starred => {
+      if (!starred) {
         return <Mutation mutation={ STAR_REPOSITORY } variables={{ id }}>
           {(addStar, { data, loading, error }) => {
-            if (loading) {
-              return <div>{ addStarLoading }</div>
+            if (loading) return <div>{ addStarLoading }</div>
+            if (error) return errorDiv(error);
+            if (data) {
+              if (isStarred) stargazers--;
             }
-            if (error) {
-              return errorDiv(error);
-            }
+
             return (
               <div>
-                Stargazers: { this.props.repository.stargazers.totalCount }
+                Stargazers: { stargazers }
                 <button onClick={ addStar }>
                   STAR
                 </button>
@@ -43,15 +59,15 @@ class RepoListItem extends Component {
       } else {
         return <Mutation mutation={ UNSTAR_REPOSITORY } variables={{ id }}>
           {(removeStar, { data, loading, error }) => {
-            if (loading) {
-              return <div>{ removeStarLoading }</div>;
+            if (loading) return <div>{ removeStarLoading }</div>;
+            if (error) return errorDiv(error);
+            if (data) {
+              if (!isStarred) stargazers++;
             }
-            if (error) {
-              return errorDiv(error);
-            }
+
             return (
               <div>
-                Stargazers: { this.props.repository.stargazers.totalCount }
+                Stargazers: { stargazers }
                 <button onClick={ removeStar }>
                   UNSTAR
                 </button>
