@@ -1,6 +1,7 @@
 import ApolloClient, { InMemoryCache } from 'apollo-boost';
 import { ApolloProvider } from "react-apollo";
 import React, { Component } from 'react';
+import Radium from 'radium';
 import Dashboard from './utility/dashboard';
 import Footer from './utility/footer';
 import './App.css';
@@ -34,4 +35,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
