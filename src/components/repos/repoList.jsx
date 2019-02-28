@@ -7,16 +7,15 @@ import Loading from '../utility/loading';
 class RepoList extends React.Component {
   render() {
     const searchTerm = this.props.searchTerm; 
+    const errorDiv = err => <div className='error'>{ err.message }</div>
+    
     const query = (login = '') => (
       <Query query={ GET_REPOSITORIES } variables={{ login }}>
         {
           ({ loading, error, data }) => {
-            console.log('HEREH', login);
             if (loading) return <Loading />
-            if (error) {
-              return <div>{ error.message }</div>
-            }
-            console.log('THISISDATA: ', data);
+            if (error) return errorDiv(error);
+
             if (
               data &&
               data.repositoryOwner &&
@@ -25,8 +24,8 @@ class RepoList extends React.Component {
               const repos = data.repositoryOwner.repositories.nodes;
               const renderingRepos = repos.map(repo =>
                 <RepoListItem repository={ repo } key={ repo.id } />
-                );
-                const count = renderingRepos.length;
+              );
+              const count = renderingRepos.length;
               return (
                 <ul>
                   <div>
@@ -43,7 +42,7 @@ class RepoList extends React.Component {
       </Query>
     );
     return (
-      <div>
+      <div className='repo-list'>
         { query(searchTerm) }
       </div>
     )

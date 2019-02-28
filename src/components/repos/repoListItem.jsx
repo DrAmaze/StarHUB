@@ -18,52 +18,56 @@ class RepoListItem extends Component {
 
     const addStarLoading = <div>Sending the star...</div>;
     const removeStarLoading = <div>Removing the star...</div>;
-    const errorDiv = err => <div className='error'>{ err }</div>;
+    const errorDiv = err => <div className='error'>{ err.message }</div>;
 
+    const mutation = (starred = false) => {
+      if (starred) {
+        return <Mutation mutation={ STAR_REPOSITORY } variables={{ id }}>
+          {(addStar, { data, loading, error }) => {
+            if (loading) {
+              return <div>{ addStarLoading }</div>
+            }
+            if (error) {
+              return errorDiv(error);
+            }
+            return (
+              <div>
+                Stargazers: { this.props.repository.stargazers.totalCount }
+                <button onClick={ addStar }>
+                  STAR
+                </button>
+              </div>
+            )
+          }}
+        </Mutation>
+      } else {
+        return <Mutation mutation={ UNSTAR_REPOSITORY } variables={{ id }}>
+          {(removeStar, { data, loading, error }) => {
+            if (loading) {
+              return <div>{ removeStarLoading }</div>;
+            }
+            if (error) {
+              return errorDiv(error);
+            }
+            return (
+              <div>
+                Stargazers: { this.props.repository.stargazers.totalCount }
+                <button onClick={ removeStar }>
+                  UNSTAR
+                </button>
+              </div>
+            )
+          }}
+        </Mutation>
+      }
+    }
+    
     return (
       <li>
         <h2>{ this.props.repository.name }</h2>
         <h5>{ this.props.repository.owner.login }</h5>
         <h5>{ this.props.repository.url }</h5>
-        { !viewerHasStarred ? (
-          <Mutation mutation={ STAR_REPOSITORY } variables= {{ id }}>
-            {(addStar, { data, loading, error }) => {
-              if (loading) {
-                return <div>{ addStarLoading }</div>
-              }
-              if (error) {
-                return errorDiv(error);
-              }
-              return (
-                <div>
-                  Stargazers: { this.props.repository.stargazers.totalCount }
-                  <button onClick={ addStar }>
-                    STAR
-                  </button>
-                </div>
-              )
-            }}
-          </Mutation>
-        ) : (
-          <Mutation mutation={ UNSTAR_REPOSITORY} variables={{ id }}>
-            {(removeStar, { data, loading, error }) => {
-              if (loading) {
-                return <div>{ removeStarLoading }</div>;
-              }
-              if (error) {
-                return errorDiv(error);
-              }
-              return (
-                <div>
-                  Stargazers: { this.props.repository.stargazers.totalCount }
-                  <button onClick={ removeStar }>
-                    UNSTAR
-                  </button>
-                </div>
-              )
-            }}
-          </Mutation>
-        )}
+        { mutation(viewerHasStarred) }
       </li>
     )
   }
