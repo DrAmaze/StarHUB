@@ -41,6 +41,17 @@ export const GET_REPOSITORIES = gql`
   }
 `;
 
+export const STAR_REPOSITORY = gql`
+  mutation StarRepository($id: ID!) {
+    addStar(input: { starrableId: $id }) {
+      starrable {
+        id
+        viewerHasStarred
+      }
+    }
+  }
+`;
+
 // repositoryOwner:
 // repositories:
 // nodes: Array(20)

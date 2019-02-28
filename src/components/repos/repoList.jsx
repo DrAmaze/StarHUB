@@ -34,6 +34,8 @@ class RepoList extends React.Component {
                   </div>
                 </ul> 
               )
+            } else {
+              return <div></div>
             }
           }
         }

@@ -6,7 +6,6 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       searchTerm: '',
-      submitted: false
     }
   }
 
@@ -15,17 +14,15 @@ class Dashboard extends Component {
   }
   
   render() {
-    const { searchTerm, submitted } = this.state;
-    const repoList = submitted ? <RepoList searchTerm={ searchTerm } /> : 'search for something!';
+    const { searchTerm } = this.state;
+    const repoList = <RepoList searchTerm={ searchTerm } />;
     return (
       <div>
         <div>
           <input type='text'
-            placeholder='Search By Repository owner'
+            placeholder='Search GitHub by Username'
+            required
             onChange={ e => this.setState({ searchTerm: e.target.value }) } />
-          <button
-            onClick={ e => this.search(e) }>
-            Search</button>
         </div>
 
         <div>

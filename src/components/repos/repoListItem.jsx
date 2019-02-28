@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 
 class RepoListItem extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     starred: this.props.repository
+  //   }
+  // }
+
   render() {
+   
     return (
       <li>
         <h2>{ this.props.repository.name }</h2>
