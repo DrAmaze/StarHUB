@@ -9,7 +9,7 @@ export const colors = {
 export const styles = {
   app: {
     backgroundColor: colors.cream,
-    height: '100%',
+    height: '1000px',
   },
   dashboard: {
     textAlign: 'center'
@@ -51,5 +51,21 @@ export const styles = {
     ':hover': {
       color: colors.salmon
     }
-  }
+  },
+  repoList: {
+    display: 'inline-grid',
+    gridTemplateColumns: '33% 34% 33%',
+    gridTemplateRows: 'auto',
+    width: '100%',
+  },
+  count: {
+    fontSize: '1em',
+    textAlign: 'center',
+    margin: '1.5em 0',
+  },
+  number: {
+    color: colors.purple,
+    fontWeight: 'bold',
+    display: 'inline'
+  },
 }

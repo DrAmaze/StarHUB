@@ -1,8 +1,10 @@
 import React from 'react';
+import Radium from 'radium';
 import { Query } from 'react-apollo';
 import RepoListItem from './repoListItem';
 import { GET_REPOSITORIES } from '../../actions/queries';
 import Loading from '../utility/loading';
+import { styles } from '../styles/styles';
 
 class RepoList extends React.Component {
   render() {
@@ -23,16 +25,19 @@ class RepoList extends React.Component {
             ) {
               const repos = data.repositoryOwner.repositories.nodes;
               const renderingRepos = repos.map(repo =>
-                <RepoListItem repository={ repo } key={ repo.id } />
+                <RepoListItem repository={ repo }
+                  key={ repo.id }/>
               );
               const count = renderingRepos.length;
               return (
-                <ul>
-                  <div>
-                    <h3>Showing { count } results for { searchTerm }</h3>
+                <div>
+                  <h3 style={ styles.count }>
+                    Showing <p style={ styles.number }>{ count }</p> results for { searchTerm }
+                  </h3>
+                  <ul style={ styles.repoList } >
                     { renderingRepos }
-                  </div>
-                </ul> 
+                  </ul> 
+                </div>
               )
             } else {
               return <div></div>
@@ -49,4 +54,4 @@ class RepoList extends React.Component {
   }
 }
 
-export default RepoList;
+export default Radium(RepoList);

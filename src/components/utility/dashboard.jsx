@@ -23,7 +23,7 @@ class Dashboard extends Component {
         <div style={ styles.dashboard }>
           <input type='text'
             className='search'
-            placeholder='Search GitHub by Username'
+            placeholder='Search GitHub by Username (case sensitive)'
             required
             onChange={ e => this.setState({ searchTerm: e.target.value }) }
             style={ styles.input } />
