@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
 import {
   STAR_REPOSITORY,
   UNSTAR_REPOSITORY
 } from '../../actions/queries';
 import { Mutation } from 'react-apollo';
+import { styles } from '../styles/styles';
 
 class RepoListItem extends Component {
   constructor(props) {
@@ -35,9 +37,10 @@ class RepoListItem extends Component {
             }
 
             return (
-              <div>
-                Stargazers: { stargazers }
-                <button onClick={ addStar }>
+              <div style={ styles.starring }>
+                <div>Stargazers: { stargazers }</div>
+                <button onClick={ addStar }
+                  style={ styles.button }>
                   STAR
                 </button>
               </div>
@@ -54,8 +57,8 @@ class RepoListItem extends Component {
             }
 
             return (
-              <div>
-                Stargazers: { stargazers }
+              <div style={ styles.starring }>
+                <div>Stargazers: { stargazers }</div>
                 <button onClick={ removeStar }>
                   UNSTAR
                 </button>
@@ -67,14 +70,16 @@ class RepoListItem extends Component {
     }
     
     return (
-      <li>
-        <h2>{ this.props.repository.name }</h2>
-        <h5>{ this.props.repository.owner.login }</h5>
-        <h5>{ this.props.repository.url }</h5>
+      <li style={ styles.repoListItem }>
+        <h2 style={ styles.itemHeader }>{ this.props.repository.name }</h2>
+        <h5 style={ styles.url }><a href={ this.props.repository.url }
+          style={ styles.hover }>
+          { this.props.repository.url }
+        </a></h5>
         { mutation(viewerHasStarred) }
       </li>
     )
   }
 }
 
-export default RepoListItem;
+export default Radium(RepoListItem);

@@ -9,7 +9,7 @@ export const colors = {
 export const styles = {
   app: {
     backgroundColor: colors.cream,
-    height: '1000px',
+    height: '110%',
   },
   dashboard: {
     textAlign: 'center'
@@ -18,11 +18,21 @@ export const styles = {
     backgroundColor: colors.cream,
     borderBottom: `2px dotted ${ colors.blue }`,
     color: colors.purple,
-    width: '40%',
+    width: '400px',
     textAlign: 'center',
     ':focus': {
       outline: 'none'
-    }
+    },
+    '@media (max-width: 415px)': {
+      width: '90%',
+      fontSize: '.8em'
+    },
+    '@media (max-width: 315px)': {
+      fontSize: '.6em'
+    },
+    '@media (max-width: 250px)': {
+      fontSize: '.5em'
+    },
   },
   header: {
     color: colors.purple,
@@ -56,7 +66,42 @@ export const styles = {
     display: 'inline-grid',
     gridTemplateColumns: '33% 34% 33%',
     gridTemplateRows: 'auto',
+    textAlign: 'center',
     width: '100%',
+    '@media (max-width: 1100px)': {
+      gridTemplateColumns: '50% 50%',
+    },
+    '@media (max-width: 475px)': {
+      gridTemplateColumns: '100%',
+    }
+  },
+  repoListItem: {
+    margin: '2em 1em',
+    padding: '.7em',
+    border: `1px dotted ${ colors.blue }`,
+    borderRadius: '5px',
+    '@media (max-width: 750px)': {
+      margin: '1em .5em',
+    },
+  },
+  itemHeader: {
+    fontWeight: 'bold',
+    fontSize: '1.8em',
+    color: colors.blue,
+    '@media (max-width: 600px)': {
+      fontSize: '1em',
+    },
+    '@media (max-width: 475px)': {
+      fontSize: '2em',
+    }, 
+    '@media (max-width: 375px)': {
+      fontSize: '1em',
+    }
+  },
+  starring: {
+    display: 'flex',
+    flexDirection: 'horizontal',
+    justifyContent: 'space-evenly'
   },
   count: {
     fontSize: '1em',
@@ -68,4 +113,23 @@ export const styles = {
     fontWeight: 'bold',
     display: 'inline'
   },
+  button: {
+    border: `1px solid ${ colors.yellow }`,
+    borderRadius: '10px',
+  },
+  url: {
+    '@media (max-width: 690px)': {
+      fontSize: '.5em'
+    },
+    '@media (max-width: 475px)': {
+      fontSize: '1em',
+    },
+    '@media (max-width: 375px)': {
+      fontSize: '.5em',
+    }
+  },
+  loading: {
+    textAlign: 'center',
+    color: colors.purple
+  }
 }
