@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
+import { styles } from '../styles/styles';
 import RepoList from '../repos/repoList';
 
 class Dashboard extends Component {
@@ -18,11 +20,13 @@ class Dashboard extends Component {
     const repoList = <RepoList searchTerm={ searchTerm } />;
     return (
       <div>
-        <div>
+        <div style={ styles.dashboard }>
           <input type='text'
+            className='search'
             placeholder='Search GitHub by Username'
             required
-            onChange={ e => this.setState({ searchTerm: e.target.value }) } />
+            onChange={ e => this.setState({ searchTerm: e.target.value }) }
+            style={ styles.input } />
         </div>
 
         <div>
@@ -33,4 +37,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default Radium(Dashboard);

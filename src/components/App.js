@@ -1,10 +1,10 @@
 import ApolloClient, { InMemoryCache } from 'apollo-boost';
-import { ApolloProvider } from "react-apollo";
+import { ApolloProvider } from 'react-apollo';
 import React, { Component } from 'react';
 import Radium from 'radium';
+import { styles } from './styles/styles';
 import Dashboard from './utility/dashboard';
 import Footer from './utility/footer';
-import './App.css';
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
@@ -23,8 +23,10 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={ client } >
-        <div className="App">
-          <header className="App-header">
+        <div className='App'
+          style={ styles.app }>
+          <header className='App-header'
+            style={ styles.header }>
             <h1>StarHUB</h1>
           </header>
           <Dashboard />
