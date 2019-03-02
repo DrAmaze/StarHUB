@@ -76,7 +76,7 @@ export const styles = {
     }
   },
   repoListItem: {
-    margin: '2em 1em',
+    margin: '1em',
     padding: '.7em',
     border: `1px dotted ${ colors.blue }`,
     borderRadius: '5px',
@@ -103,6 +103,9 @@ export const styles = {
     flexDirection: 'horizontal',
     justifyContent: 'space-evenly'
   },
+  gazers: {
+    margin: 'auto 0'
+  },
   count: {
     fontSize: '1em',
     textAlign: 'center',
@@ -114,8 +117,18 @@ export const styles = {
     display: 'inline'
   },
   button: {
-    border: `1px solid ${ colors.yellow }`,
+    border: `1px solid ${ colors.salmon }`,
     borderRadius: '10px',
+    backgroundColor: colors.yellow,
+    color: colors.salmon,
+    padding: '5px 10px',
+  },
+  buttonHover: {
+    ':hover': {
+      border: `1px solid ${ colors.yellow }`,
+      backgroundColor: colors.salmon,
+      color: colors.yellow,
+    }
   },
   url: {
     '@media (max-width: 690px)': {
@@ -131,5 +144,8 @@ export const styles = {
   loading: {
     textAlign: 'center',
     color: colors.purple
+  },
+  space: {
+    padding: '20px 0'
   }
 }

@@ -31,6 +31,7 @@ class App extends Component {
           </header>
           <Dashboard />
           <Footer />
+          <div style={ styles.space }></div>
         </div>
       </ApolloProvider>
     );

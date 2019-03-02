@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
+import { v4 } from 'uuid';
 import {
   STAR_REPOSITORY,
   UNSTAR_REPOSITORY
@@ -22,7 +23,7 @@ class RepoListItem extends Component {
     let { stargazers } = this.state;
     const { isStarred } = this.state;
 
-    const addStarLoading = <div>Sending the star...</div>;
+    const addStarLoading = <div style={ styles.gazers }>Sending the star...</div>;
     const removeStarLoading = <div>Removing the star...</div>;
     const errorDiv = err => <div className='error'>{ err.message }</div>;
 
@@ -38,9 +39,10 @@ class RepoListItem extends Component {
 
             return (
               <div style={ styles.starring }>
-                <div>Stargazers: { stargazers }</div>
+                <div style={ styles.gazers }>Stargazers: { stargazers }</div>
                 <button onClick={ addStar }
-                  style={ styles.button }>
+                  style={ styles.button }
+                  key={ v4() }>
                   STAR
                 </button>
               </div>
@@ -58,8 +60,10 @@ class RepoListItem extends Component {
 
             return (
               <div style={ styles.starring }>
-                <div>Stargazers: { stargazers }</div>
-                <button onClick={ removeStar }>
+                <div style={ styles.gazers }>Stargazers: { stargazers }</div>
+                <button onClick={ removeStar }
+                  style={ styles.button }
+                  key={ v4() }>
                   UNSTAR
                 </button>
               </div>
