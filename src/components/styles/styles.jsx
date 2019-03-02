@@ -122,8 +122,6 @@ export const styles = {
     backgroundColor: colors.yellow,
     color: colors.salmon,
     padding: '5px 10px',
-  },
-  buttonHover: {
     ':hover': {
       border: `1px solid ${ colors.yellow }`,
       backgroundColor: colors.salmon,
